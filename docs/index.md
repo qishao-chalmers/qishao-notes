@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: https://cdn.staticaly.com/gh/eryajf/tu/main/img/image_20220720_132208.png
-tagline: Vdoing博客主题模板
+tagline: Computer System
 heroText: qishao-notes
 actionText: 开始浏览 →
 actionLink: /pages/24768e/
