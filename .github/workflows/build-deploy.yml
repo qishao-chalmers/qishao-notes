@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 16
       - run: |
-          yarn
+          yarn --ignore-engines
           yarn build
 
       - name: Deploy 🚀
