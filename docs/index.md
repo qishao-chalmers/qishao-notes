@@ -1,9 +1,9 @@
 ---
 home: true
 heroImage: https://cdn.staticaly.com/gh/eryajf/tu/main/img/image_20220720_132208.png
-tagline: Computer System
-heroText: qishao-notes
-actionText: 开始浏览 →
+tagline: Qi Shao
+heroText: Notes in Computer System.
+actionText: Start →
 actionLink: /pages/24768e/
 bannerBg: none # auto => 网格纹背景(有bodyBgImg时无背景)，默认 | none => 无 | '大图地址' | background: 自定义背景样式       提示：如发现文本颜色不适应你的背景时可以到palette.styl修改$bannerTextColor变量
 
