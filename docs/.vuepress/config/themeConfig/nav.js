@@ -5,5 +5,5 @@ module.exports = [
   { text: 'two',link: '/two/',},
   { text: 'three', link: '/three/' },
   { text: 'BBS', link: '/message-board/' },
-  { text: 'Chinese Blog Web', link: 'https://blog.csdn.net/hit_shaoqi' },
+  { text: 'CSDN', link: 'https://blog.csdn.net/hit_shaoqi' },
 ]
