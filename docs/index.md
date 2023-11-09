@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: /docs/pictures/batman.png
-tagline: Qi Shao
+# heroImage: /docs/pictures/batman.png
+# tagline: Qi Shao
 heroText: Notes in Computer System.
 actionText: Start →
 actionLink: /pages/24769e/
