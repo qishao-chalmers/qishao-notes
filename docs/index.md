@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://github.com/hitqshao/qishao-notes/blob/main/docs/pictures/batman.png
+heroImage: docs/pictures/batman.png
 tagline: Qi Shao
 heroText: Notes in Computer System.
 actionText: Start →
