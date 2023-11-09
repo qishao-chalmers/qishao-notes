@@ -1,7 +1,7 @@
 // nav
 module.exports = [
   { text: 'Home', link: '/' },
-  { text: 'one',link: '/one/',},
+  { text: 'hbm',link: '/hbm/',},
   { text: 'two',link: '/two/',},
   { text: 'gpu', link: '/gpu/' },
   { text: 'cpu', link: '/cpu/' },
