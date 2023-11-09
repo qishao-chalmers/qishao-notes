@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /docs/pictures/batman.png
+heroImage: docs/pictures/batman.png
 tagline: Qi Shao
 heroText: Notes in Computer System.
 actionText: Start →
