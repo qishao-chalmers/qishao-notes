@@ -5,6 +5,7 @@ module.exports = [
   { text: 'compiler', link: '/compiler/' },
   { text: 'gpu', link: '/gpu/' },
   { text: 'cpu', link: '/cpu/' },
+  { text: 'llm', link: '/llm/' },
   { text: 'BBS', link: '/message-board/' },
   { text: 'CSDN', link: 'https://blog.csdn.net/hit_shaoqi' },
 ]
