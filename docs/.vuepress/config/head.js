@@ -10,6 +10,10 @@ module.exports = [
     },
   ],
   // ['meta', { name: 'baidu-site-verification', content: 'code-LTKHwOecxI' }], // 百度统计的站长验证
+  
+  ['meta', { name: 'google-site-verification', content: '66w5U9NY5gJWu7iBtHKMbhpXkV94jy31L_RHbvrZZzYI' }], // google search
+
+  
   ['meta', { name: 'theme-color', content: '#11a8cd' }], // 移动浏览器主题颜色
   // [
   //   'script',
