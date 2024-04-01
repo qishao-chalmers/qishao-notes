@@ -4,7 +4,7 @@ const nav = require('./themeConfig/nav.js');
 // 主题配置
 module.exports = {
   nav, // 顶部导航栏
-  sidebarDepth: 2, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
+  sidebarDepth: 3, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
   //logo: 'docs/pictures/batman.png', // 导航栏logo
   repo: 'hitqshao/qishao-notes', // 导航栏右侧生成Github链接
   searchMaxSuggestions: 10, // 搜索结果显示最大数
@@ -34,7 +34,7 @@ module.exports = {
   // pageButton: false, // 是否显示快捷翻页按钮，默认true
 
   sidebar: { mode: 'structuring', collapsable: false }, // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | 自定义    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
-  sidebarDepth: 2,
+  sidebarDepth: 3,
   pageStyle: 'line', // 页面风格，可选值：'card'卡片 | 'line' 线（未设置bodyBgImg时才生效）， 默认'card'。 说明：card时背景显示灰色衬托出卡片样式，line时背景显示纯色，并且部分模块带线条边框
   updateBar: { // 最近更新栏
     showToArticle: false, // 显示到文章页底部，默认true
