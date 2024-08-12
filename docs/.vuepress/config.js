@@ -4,7 +4,7 @@ const themeConfig = require('./config/themeConfig.js');
 
 module.exports = {
   theme: 'vdoing', // 使用npm包主题
-  title: "Qi Shao",
+  title: "CPU & GPU Microarch. Qi Shao",
   description: 'Computer System',
   base: '/qishao-notes/', // 格式：'/<仓库名>/'， 默认'/'
   markdown: {
