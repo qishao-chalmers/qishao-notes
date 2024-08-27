@@ -22,6 +22,11 @@ As to bottom-level coding, it is sensible that cycle-accurate simulator has most
 
 In my research, I also met some paper that they claimed that they found previous cited work has miscoding some unit, so that the cited performance cannot be trusted.
 
+### Code Review practices & My Work Experience
+
+When I was in industry, we also follow the guideline of Google C++ programming style. But we didn't follow Google's code review. During the literature, I found that this part very interesting.
+
+As a freshgraduate student, I also found that I could benefit a lot from reviewing code from senior or professionals. And based on this observation, during my research, when I first stepped into new area, for example compiler, like LLVM, I tends to go back to the initial commit of LLVM project and learn how the initional function was added into LLVM Project.
 
 ## Guest's Lecture and My Research & Work Experience
 
