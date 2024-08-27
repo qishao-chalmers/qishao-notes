@@ -26,7 +26,10 @@ In my research, I also met some paper that they claimed that they found previous
 
 When I was in industry, we also follow the guideline of Google C++ programming style. But we didn't follow Google's code review. During the literature, I found that this part very interesting.
 
-As a freshgraduate student, I also found that I could benefit a lot from reviewing code from senior or professionals. And based on this observation, during my research, when I first stepped into new area, for example compiler, like LLVM, I tends to go back to the initial commit of LLVM project and learn how the initional function was added into LLVM Project.
+As a freshgraduate student, I also found that I could benefit a lot from reviewing code from senior or professionals. And based on this observation, during my research, when I first stepped into new area, for example compiler, like LLVM, I tends to go back to the initial commit of LLVM project and learn how the initional function was added into LLVM Project. It is the idea of *Education Maintaining norms* mentioned in the paper. Another interesting finding is that as employer stays in Google longer, commemnts per change also decrease, and converge to each change 2 comments.
+
+### Verification & My Work Experience
+In the verification process, I have worked in some company that the programmer is also the verifier. They design test cases for their own code. An anology could be that an athelete is also the referee of the game. The company has follow this routine for a while, but in the end we found that there are always bugs that the programmer cannot found by themselves. It is since that the cases that the programers will always work. They are blind to the test cases that would trigger the bug. If they realized it, they would have fixed it. In the end, the company decide to manage a new team of verifiers that focus on testing the program.
 
 ## Guest's Lecture and My Research & Work Experience
 
