@@ -73,8 +73,27 @@ They try to figure out the characteristic that original and compressed model mos
 
 To my supervise, they found that retraining fails to reduce the total number of disagreements. It can also introduce many new disagreements.
 
+### Paper 2: "The Impact of Knowledge Distillation on the Energy Consumption and Runtime Efficiency of NLP Models"  [^2]
+
+In this paper, they study the impact of knowledge distillation in terms of energy consumption and runtime efficicency. They evaluate different models, BERT, Distilled-BERT, GPT-2 and Distilled-GPT2.
+
+#### Energy Consumption
+
+As to distilled-GPT2, it experience 28.1% decrease in energy comsumption compared to GPT2 and Distilled-BERT 43.96%.
+
+#### Inference Time
+Distilled-BERT and BERT takes inference time as 674ms and 891 ms, correspondingly. And GPT2 tooks 798ms, compared with Distilled-GPT 555ms.
+
+#### Utilization
+Distilled-BERT has reduction in CPU utilization about 0.10% compared with BERT and reduction of memory utilization as 0.14%.
+
+Distilled-GPT2 has lower 0.79% memory utilization and 0.13% lower CPU utilization.
+
+#### Conclusion
+Compared with BERT, Distilled-BERT is more energy-efficient. And Distilled-GPT2 has better inference time and memory usage compared with GPT2.
+
 ## References
 
-[^1]:
+[^1]: Towards Understanding Model Quantization for Reliable Deep Naural Network Deployment
 
-[^2]:
+[^2]: The Impact of Knowledge Distillation on the Energy Consumption and Runtime Efficiency of NLP Models
