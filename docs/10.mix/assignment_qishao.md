@@ -39,7 +39,13 @@ In the verification process, I have worked in some company that the programmer i
 
 It is surprising that most of the answers are "We dont know". I also didn't use AI to generate programming code, since I feels that I have been trained to learn how to write efficient program and the AI could not achieve, until last year. Last year during the WASP conference, I found that most of the students have been using copilot. And nowadays that cursor, a new programming assistant tool is become popular. After the WASP conference, I tried Chat-GPT to write demo code for LLVM function and it works well. Sometimes, the code does not work, but at least, it provide a demo framework or an idea or suggest for you to program. As to me, if I am very familiar with some framework, for example, simulators, I will write code and modify it by myself, since I am better than chat-GPT or at least I dont need to understand the chat-gpt's code and debug. But as to new framework that I dont know, I will ask chatgpt to present some demo. It boosts the progress of my learning new framework.
 
-After using chatgpt to generate code, I register WASP Natural Language Processing Code to learn why Transformers works in programming area. It is sensible that transformers at good at predict next token and it is also trained with public opensource frameworks. In this way,it could understand the programming style and generate code. And we can also view programming language 
+After using chatgpt to generate code, I register WASP Natural Language Processing Code to learn why Transformers works in programming area. It is sensible that transformers at good at predict next token and it is also trained with public opensource frameworks. In this way,it could understand the programming style and generate code. And we can also view programming language as a universal language to communicate ideas. Thus, if it could works in chat robots, it will also work in programming.
+
+### SAAB Safe-critical Consideration with AI
+
+Usually AI tools like chatgpt are on-line, and we could use chatgpt to generate programs and we could remarks on the result to provide feedback to chatgpt about the quality of code. Thus it is a online feedback loop. As to Saab ATM, I have two considerations:
+- Before we introduce AI to generate test cases for code in SAAB, how could we promise the black-box test cases are enough to cover all safe-critiacal cases. And after we use AI, how we keep the same promise.
+- As a commercial company of SAAB, if they use chatgpt or some other AI tool to generate test cases or program demos, how could AI tool provider provide that the tool is safe from not generating risky code?
 
 ## CAIN Papers
 
