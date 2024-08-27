@@ -71,6 +71,8 @@ They try to figure out the characteristic that original and compressed model mos
 
 #### Impact of retraining
 
+To my supervise, they found that retraining fails to reduce the total number of disagreements. It can also introduce many new disagreements.
+
 ## References
 
 [^1]:
