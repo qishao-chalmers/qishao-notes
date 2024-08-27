@@ -49,6 +49,16 @@ Usually AI tools like chatgpt are on-line, and we could use chatgpt to generate 
 
 ## CAIN Papers
 
+My research topic is about improving performance of CPU & GPU, mainly with compression technique. Among the CAIN papers, I choose two paper related to memory compression.
+
+### Paper 1: "Towards Understanding Model Quantization for Reliable Deep Naural Network Deployment" [^1]
+
+This paper characterize the behaviour of quantization models. They mainly focused on the following four question and based on results of study, they provides answers to each of them.
+
+#### Impact of Data Distribution Shift to Compressed Models
+
+
+
 ## References
 
 [^1]:
