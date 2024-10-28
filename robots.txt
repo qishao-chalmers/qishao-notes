@@ -1,0 +1,9 @@
+# Allow all search engines to index the site
+User-agent: *
+Allow: /
+
+# Disallow access to GitHub Pages' default settings page (if applicable)
+Disallow: /404.html
+
+# Specify the location of the sitemap
+Sitemap: https://hitqshao.github.io/qishao-notes/sitemap.xml
