@@ -1,0 +1,25 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main  # or 'master' if that's your default branch
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Generate Sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://hitqshao.github.io/qishao-notes
+    
+    - name: Commit and Push Sitemap
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add sitemap.xml
+        git commit -m "Update sitemap" || exit 0
+        git push
