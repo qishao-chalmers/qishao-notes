@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://hitqshao.github.io/qishao-notes/sitemap.xml
