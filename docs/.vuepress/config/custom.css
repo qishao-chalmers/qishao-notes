@@ -1,6 +1,71 @@
 /* CSS to center images */
+
 .img-center {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+/* Default styling for all images in markdown content */
+.theme-default-content img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: 800px;    /* Default width */
+    height: auto;    /* Maintain aspect ratio */
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Size variations you can add to images using classes */
+.img-small {
+    width: 400px !important;
+}
+
+.img-medium {
+    width: 600px !important;
+}
+
+.img-large {
+    width: 1000px !important;
+}
+
+/* Full width option */
+.img-full {
+    width: 100% !important;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .theme-default-content img {
+        width: 90vw;    /* 90% of viewport width on mobile */
+    }
+    
+    .img-small {
+        width: 70vw !important;
+    }
+    
+    .img-medium {
+        width: 80vw !important;
+    }
+    
+    .img-large, .img-full {
+        width: 90vw !important;
+    }
+}
+
+/* Optional: Add hover effect */
+.theme-default-content img:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: Remove effects for specific images */
+.no-effects {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    transform: none !important;
 }
