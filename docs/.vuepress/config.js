@@ -13,13 +13,6 @@ module.exports = {
 
   head,
   // vssue 评论插件
-  plugins: [
-    [
-      'sitemap',
-      {
-        hostname: 'https://hitqshao.github.io/qishao-notes', // Your site URL
-      },
-    ],
-  ],
+  plugins,
   themeConfig,
 }
