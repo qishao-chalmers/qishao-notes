@@ -1,6 +1,0 @@
-# Allow all search engines to index the site
-User-agent: *
-Allow: /
-
-# Specify the location of the sitemap
-Sitemap: https://hitqshao.github.io/qishao-notes/sitemap.xml
