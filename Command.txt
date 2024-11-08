@@ -1,0 +1,236 @@
+1)
+cmake -S llvm -G "Unix Makefiles" -DCMake_INSTALL_PREFIX=/home/qishao/Project/llvm-project/install   -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS=clang -DLLVM_ENABLE_ASSERTIONS=ON    -DLLVM_TARGETS_TO_BUILD="MSP430;RISCV" ../llvm
+
+#cache on
+cmake -S llvm -G "Unix Makefiles" -DCMake_INSTALL_PREFIX=/home/qishao/Project/llvm-project/install   -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS=clang -DLLVM_ENABLE_ASSERTIONS=ON    -DLLVM_TARGETS_TO_BUILD="MSP430;RISCV;X86"  -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache  ../llvm
+
+cmake --install ./ --prefix ~/Project/llvm-project/install
+
+2)
+    build llvm IR pass
+    /home/qishao/Project/llvm_12/build
+
+    a) make 
+    b) ./bin/opt -load ./lib/LLVMObjFirstInsert.so -objFirstInsert /home/qishao/Project/learning_llvm/ObjectCollector/test/output.ll
+
+
+    2.1) generate new ll
+    ./bin/opt -load ./lib/NewAllocAnalysis.so   -newAllocAnalysis  -S < /home/qishao/Project/learning_llvm/ObjectCollector/test/malloc_int/output.ll > instrument.ll
+
+    ./build/bin/opt -load ./build/lib/NewAllocAnalysis.so   -newAllocAnalysis  -S < /home/qishao/Project/learning_llvm/ObjectCollector/test/new_int/output.ll > /home/qishao/Project/learning_llvm/ObjectCollector/test/new_int/instrument.ll
+
+    2.2) generate object file
+    ./bin/llc -filetype=obj instrument.ll -o instrument.o
+
+    2.3) generate exe
+    ./bin/clang instrument.o -o instrument_bin -L. -llogmalloc
+
+    3.1) run optimizer pass with IR
+    /home/qishao/Project/llvm_12/build/bin/opt  --memory-alloc  -S ir.ll -o test.ll
+
+3) view a DAG in llvm IR form
+    ~/Project/llvm_12/build/bin/llc -fast-isel=false  -view-dag-combine1-dags output.ll
+
+## compile for tinyriscv
+
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_TARGETS_TO_BUILD="TINYRISCV;TOYRISCV;RISCV"   -DLLVM_ENABLE_RUNTIMES="clang" -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi;libunwind" ..
+
+4) Profile with Nsight
+
+/usr/local/cuda-12.4/bin/nsight-sys
+
+
+sudo nvprof --analysis-metrics  --output-profile profile.nvvp ./train_gpt2cu -b 1 -x 40
+
+sudo nvprof --analysis-metrics  --force-overwrite   --unified-memory-profiling  --metrics all  --output-profile profile.nvvp ./train_gpt2cu -b 1 -x 200
+
+
+sudo /usr/local/cuda-12.4/bin/nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java 
+
+## build riscv-instrinsic
+cmake -G Ninja -DCMAKE_BUILD_TYPE="Debug" -DBUILD_SHARED_LIBS=True -DLLVM_USE_SPLIT_DWARF=True -DCMAKE_INSTALL_PREFIX="/home/qishao/Project/riscv_gnu_toolchain" -DLLVM_OPTIMIZED_TABLEGEN=True  -DLLVM_BUILD_TESTS=False   -DLLVM_DEFAULT_TARGET_TRIPLE="riscv32-unknown-elf"   -DLLVM_TARGETS_TO_BUILD="RISCV"   -DLLVM_ENABLE_PROJECTS="clang"    -DLLVM_FORCE_VC_REPOSITORY=https://KEY@github.com/hitqshao/llvm-intrinsic-riscv.git  ../llvm
+
+# generate llvm IR
+./clang -target riscv32-unknown-elf -S -emit-llvm main.c -o main.ll
+
+# generate assemble code
+./llc -mtriple=riscv32 -filetype=asm main.ll
+
+# generate elf
+./clang -target riscv32-unknown-elf -c main.s -o main.o
+
+/home/qishao/Project/riscv_gnu_toolchain/riscv/bin/riscv32-unknown-elf-gcc   -c diy_malloc.c  -o diy_malloc.o
+
+/home/qishao/Project/riscv_gnu_toolchain/riscv/bin/riscv32-unknown-elf-ar  rcs diy_malloc.a diy_malloc.o
+
+#### generate assemble code with debug flag
+/home/qishao/Project/llvm-intrinsic-riscv/build/bin/llc  -debug -mtriple=riscv32  -filetype=asm malloc_new.ll
+
+5) Run llm.c
+
+./train_gpt2cu -b 1 -x 100000
+
+6) Align with 2 space
+%s/^\( \{2\}\)/    /
+
+
+7)
+###check available docker
+sudo docker container ls -a
+
+### rm docker
+sudo docker rm -f
+
+/home/qishao/Project/gpu_simulator/gpgpu-sim_UVMSmart
+
+# This is how to build a docker
+sudo docker run --name gpu_uvm -it gpgpu_uvmsmart:latest
+
+# This is how to start a docker already built
+sudo docker start gpu_uvm
+
+# execute the docker
+sudo docker exec -it 50bb87a957dc bash
+
+
+# This is how to run the docker with directory mapped to host
+# In this way, we could read and write files in host and just use docker as a env.
+sudo docker run -v /home/qishao/Project/gpu_simulator/gpgpu-sim_UVMSmart:/root/gpgpu-sim_UVMSmart_host -it gpgpu_uvmsmart:latest
+
+source ./setup_env*
+and remake then ./run |tee output.log
+sudo docker attach  50bb87a957dc
+
+~/gpgpu-sim_UVMSmart/benchmarks/Managed/stencil#
+
+# pull accelsim
+sudo docker pull accelsim/ubuntu-18.04_cuda-11
+# create a docker with image and mount
+ sudo docker run  -v ~/Project/gpu_simulator/accel-sim-framework:/home/runner/accel-sim --name accel-sim -it accelsim/ubuntu-18.04_cuda-11 bash
+
+# run with downloaded traces
+./gpu-simulator/bin/release/accel-sim.out -trace ~/accel-sim/traces/tesla-v100/2020.03.18/rodinia_2.0-ft/9.1/kmeans-rodinia-2.0-ft/_i_data_400_txt__g_data_400_result_txt__o/traces/kernelslist.g -config ./gpu-simulator/gpgpu-sim/configs/tested-cfgs/SM7_QV100/gpgpusim.config -config ./gpu-simulator/configs/tested-cfgs/SM7_QV100/trace.config
+
+# collect trace
+ ./util/tracer_nvbit/run_hw_trace.py -B rodinia_2.0-ft -D 0
+
+source ./gpu-app-collection/src/setup_environment_clip
+
+make clean_rodinia_2.0-ft
+
+make rodinia_2.0-ft
+
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda/bin:$PATH
+export CUDA_INSTALL_PATH="/usr/local/cuda/"
+export PATH=$CUDA_INSTALL_PATH/bin:$PATH
+
+sudo ubuntu-drivers list
+apt install ubuntu-drivers
+ubuntu-drivers install nvidia:470
+./util/tracer_nvbit/run_hw_trace.py -B rodinia_2.0-ft -D 0
+8) gem5 gpu
+
+PYTHON_CONFIG=/usr/bin/python3-config  scons ./build/VEGA_X86/gem5.debug
+
+build/VEGA_X86/gem5.debug configs/example/apu_se.py --benchmark-root=/home/qishao/Project/gem5/gem5-resources/src/gpu/square/bin/ --cmd=square
+
+9) llama
+make LLAMA_CUDA=1 
+
+./main -m ./models/llama-2-7b-chat.Q2_K.gguf --color --ctx_size 2048 -n -1 -ins -b 256 --top_k 10000 --temp 0.2 --repeat_penalty 1.1 -t 8 -ngl 10000
+
+interactive -n 1 -c 4 --gpus-per-task=1 -t 10
+
+srun  nsys profile -o profile_log ./main -m models/llama-2-7b-chat.Q2_K.gguf -p "Building a website can be done in 10 simple steps:\nStep 1:" -ngl 10
+
+10) ssh
+
+tetralith.nsc.liu.se
+
+11)
+perf record -F 9999 -g --  ./main  -m models/llama-2-7b-chat.Q2_K.gguf -p "Why is sky is blue. Please response with 128 words:" -n 400 -e
+perf script > out.perf
+../../FlameGraph/stackcollapse-perf.pl  out.perf > out.folded
+../../FlameGraph/flamegraph.pl out.folded  > flamegraph.svg
+
+12) build docker for llama gpu
+sudo docker build -t gpu -f .devops/full-rocm.Dockerfile .
+
+13) Debug
+llvm always fail
+
+Base64.cpp
+::operator new(sizeToAllocate);
+/home/qishao/Project/llvm_12/build/bin/clang++ -g -fpermissive -m64 -c -o DOMNodeImpl.o -DSPEC -DNDEBUG -DAPP_NO_THREADS -DXALAN_INMEM_MSG_LOADER -I. -Ixercesc -Ixercesc/dom -Ixercesc/dom/impl -Ixercesc/sax -Ixercesc/util/MsgLoaders/InMemory -Ixercesc/util/Transcoders/Iconv -Ixalanc/include -DPROJ_XMLPARSER -DPROJ_XMLUTIL -DPROJ_PARSERS -DPROJ_SAX4C -DPROJ_SAX2 -DPROJ_DOM -DPROJ_VALIDATORS -DXML_USE_INMEM_MESSAGELOADER -DSPEC_AUTO_SUPPRESS_OPENMP -O3 -mavx -DSPEC_LINUX -DSPEC_LP64 DOMNodeImpl.cpp
+
+/home/qishao/Project/llvm_12/build/bin/opt  --load  /home/qishao/Project/llvm_12/build/lib/NewAllocAnalysis.so    -newAllocAnalysis  -S < ./XMLString.ll > XMLString_test2.ll
+
+
+14) gpgpusim docker
+
+### gpgpu_uvmsmart:latest
+b673f757557b  
+:~/gpgpu-sim_UVMSmart_host 
+CUDA 8
+
+
+~/gpgpu-sim_UVMSmart_host/benchmarks/Test/GaloisGPU/
+_1.ptx:11349: Syntax error:
+
+   4
+   ^
+
+GPGPU-Sim PTX: parser error detected, exiting... but first extracting .ptx to "_ptx_errors_LWbJy4"
+
+
+GalorisGPU Error: PTX decode error
+../../rt/include/lockarray.h(36): error: identifier "threadfence" is undefined
+
+#### galois gpu success command
+2) ./bh  2 1 0 #Seems like any number would work
+
+3) ./dmr ../../inputs_2/input/delaunayrefinement/250k.2.ele.gz
+reading graphs...
+	1854151430 nodes
+	1841839379 triangles.
+
+6) ./sp seed 1000 1000 1000
+
+7) sssp
+~/gpgpu-sim_UVMSmart_host/benchmarks/Test/GaloisGPU_1/apps/sssp# python3 convert.py
+convert the text file into binary, then it can be mapped to file
+
+### srirajpaul/gpgpu-sim:0.1
+a46206699729   srirajpaul/gpgpu-sim:0.1    gpu_2019_cuda9
+
+  compile galoris failed
+  ../../rt/include/lockarray.h(36): error: identifier "threadfence" is undefined
+
+### accelsim/ubuntu-18.04_cuda-11
+a9e5a1a573ab   accelsim/ubuntu-18.04_cuda-11   accel-sim
+
+    cuda11
+
+############## compile cpp into library #######################################
+~/Project/llvm_12/build/bin/clang++ -c -Wall -fPIC -o libmalloc.o libmalloc.cpp 
+~/Project/llvm_12/build/bin/clang++ -shared -o libmalloc.so libmalloc.o
+
+~/Project/llvm_12/build/bin/clang++ -o class class.cpp -L/home/qishao/Project/lib/logmalloc -lmalloc -llogmalloc
+
+############## Match specific line 0x1fXXXXXX
+grep -Er '0x1f[0-9a-f]{6}' ./memory_operation.log  -n
+
+############## only show specific lines################
+sed -n '96623215,96624215p;96624216q' memory_operation.log
+
+
+############## First version of llvm support register and instruction ##############
+checkout 2017-02-15
+
+a8004fbde0b3665d92db418fb5ea83857bf88241
+
+checkout 2017-12-11
+
+dc31c61b18f01b21e18ccea4de0a010569e81887
+
