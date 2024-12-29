@@ -6,6 +6,7 @@ module.exports = [
   { text: 'ml&llm', link: '/llm/' },
   { text: 'compiler', link: '/compiler/' },
   { text: 'hbm',link: '/hbm/'},
+  { text: 'program',link: '/mix/'},
   { text: 'unix', link: '/unix/' },
   //{ text: 'BBS', link: '/message-board/' },
   { text: 'CSDN', link: 'https://blog.csdn.net/hit_shaoqi' },
