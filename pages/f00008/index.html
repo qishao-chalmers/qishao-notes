@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Understanding Pytorch CUDA | CPU &amp; GPU Microarch. Qi Shao</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="stylesheet" href="custom.css">
+    <script language="javascript" type="text/javascript" src="/qishao-notes/js/pgmanor-self.js"></script>
+    <meta name="description" content="Computer System">
+    <meta name="google-site-verification" content="66w5U9NY5gJWu7iBtHKMbhpXkV94jy31L_RHbvrZZzY">
+    <meta name="keywords" content="Hitqishao,golang,vue,go-web,go-admin,go-ldap-admin">
+    <meta name="theme-color" content="#11a8cd">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <link rel="preload" href="/qishao-notes/assets/css/0.styles.922e50b3.css" as="style"><link rel="preload" href="/qishao-notes/assets/js/app.11351631.js" as="script"><link rel="preload" href="/qishao-notes/assets/js/2.b768edde.js" as="script"><link rel="preload" href="/qishao-notes/assets/js/92.d40e910a.js" as="script"><link rel="prefetch" href="/qishao-notes/assets/js/10.08aa09ef.js"><link rel="prefetch" href="/qishao-notes/assets/js/11.fca6c3ed.js"><link rel="prefetch" href="/qishao-notes/assets/js/12.40c1ee10.js"><link rel="prefetch" href="/qishao-notes/assets/js/13.f184eb80.js"><link rel="prefetch" href="/qishao-notes/assets/js/14.fdb905c9.js"><link rel="prefetch" href="/qishao-notes/assets/js/15.e022a04b.js"><link rel="prefetch" href="/qishao-notes/assets/js/16.cc28076c.js"><link rel="prefetch" href="/qishao-notes/assets/js/17.0696685a.js"><link rel="prefetch" href="/qishao-notes/assets/js/18.d4a145d2.js"><link rel="prefetch" href="/qishao-notes/assets/js/19.537e76f7.js"><link rel="prefetch" href="/qishao-notes/assets/js/20.dfc4ab1d.js"><link rel="prefetch" href="/qishao-notes/assets/js/21.e5e299c3.js"><link rel="prefetch" href="/qishao-notes/assets/js/22.8d71df97.js"><link rel="prefetch" href="/qishao-notes/assets/js/23.796f401b.js"><link rel="prefetch" href="/qishao-notes/assets/js/24.f485ff78.js"><link rel="prefetch" href="/qishao-notes/assets/js/25.b7629e59.js"><link rel="prefetch" href="/qishao-notes/assets/js/26.5828e36e.js"><link rel="prefetch" href="/qishao-notes/assets/js/27.223b71e2.js"><link rel="prefetch" href="/qishao-notes/assets/js/28.0ecf0c5e.js"><link rel="prefetch" href="/qishao-notes/assets/js/29.21a8bb75.js"><link rel="prefetch" href="/qishao-notes/assets/js/3.b2e45919.js"><link rel="prefetch" href="/qishao-notes/assets/js/30.7dcaf9ed.js"><link rel="prefetch" href="/qishao-notes/assets/js/31.5f059ad4.js"><link rel="prefetch" href="/qishao-notes/assets/js/32.33fdfa7d.js"><link rel="prefetch" href="/qishao-notes/assets/js/33.02dd6ae5.js"><link rel="prefetch" href="/qishao-notes/assets/js/34.ba891fe1.js"><link rel="prefetch" href="/qishao-notes/assets/js/35.354153e2.js"><link rel="prefetch" href="/qishao-notes/assets/js/36.2bbb98ee.js"><link rel="prefetch" href="/qishao-notes/assets/js/37.4aaa12a0.js"><link rel="prefetch" href="/qishao-notes/assets/js/38.feae3c28.js"><link rel="prefetch" href="/qishao-notes/assets/js/39.915f20f5.js"><link rel="prefetch" href="/qishao-notes/assets/js/4.0f47cab8.js"><link rel="prefetch" href="/qishao-notes/assets/js/40.d1c157c7.js"><link rel="prefetch" href="/qishao-notes/assets/js/41.de315a88.js"><link rel="prefetch" href="/qishao-notes/assets/js/42.7bd3cb20.js"><link rel="prefetch" href="/qishao-notes/assets/js/43.dea4dba3.js"><link rel="prefetch" href="/qishao-notes/assets/js/44.8fa3b305.js"><link rel="prefetch" href="/qishao-notes/assets/js/45.511ae92d.js"><link rel="prefetch" href="/qishao-notes/assets/js/46.707aa431.js"><link rel="prefetch" href="/qishao-notes/assets/js/47.0d9482eb.js"><link rel="prefetch" href="/qishao-notes/assets/js/48.6138667d.js"><link rel="prefetch" href="/qishao-notes/assets/js/49.57c3a248.js"><link rel="prefetch" href="/qishao-notes/assets/js/5.8a1df451.js"><link rel="prefetch" href="/qishao-notes/assets/js/50.ea675c00.js"><link rel="prefetch" href="/qishao-notes/assets/js/51.bdb427c4.js"><link rel="prefetch" href="/qishao-notes/assets/js/52.da6557cf.js"><link rel="prefetch" href="/qishao-notes/assets/js/53.1741ac0a.js"><link rel="prefetch" href="/qishao-notes/assets/js/54.c8716fa1.js"><link rel="prefetch" href="/qishao-notes/assets/js/55.239b40a9.js"><link rel="prefetch" href="/qishao-notes/assets/js/56.05481122.js"><link rel="prefetch" href="/qishao-notes/assets/js/57.0c7c06f7.js"><link rel="prefetch" href="/qishao-notes/assets/js/58.7dca925b.js"><link rel="prefetch" href="/qishao-notes/assets/js/59.b86841ca.js"><link rel="prefetch" href="/qishao-notes/assets/js/6.caeb35d2.js"><link rel="prefetch" href="/qishao-notes/assets/js/60.2866393c.js"><link rel="prefetch" href="/qishao-notes/assets/js/61.4a4b7baa.js"><link rel="prefetch" href="/qishao-notes/assets/js/62.d14c0b0d.js"><link rel="prefetch" href="/qishao-notes/assets/js/63.1e1dc6d9.js"><link rel="prefetch" href="/qishao-notes/assets/js/64.17271e14.js"><link rel="prefetch" href="/qishao-notes/assets/js/65.7c1390fb.js"><link rel="prefetch" href="/qishao-notes/assets/js/66.eb80288c.js"><link rel="prefetch" href="/qishao-notes/assets/js/67.d7801a80.js"><link rel="prefetch" href="/qishao-notes/assets/js/68.55a18dcf.js"><link rel="prefetch" href="/qishao-notes/assets/js/69.21513ff9.js"><link rel="prefetch" href="/qishao-notes/assets/js/7.a776222e.js"><link rel="prefetch" href="/qishao-notes/assets/js/70.5e7337d9.js"><link rel="prefetch" href="/qishao-notes/assets/js/71.407a2005.js"><link rel="prefetch" href="/qishao-notes/assets/js/72.e6689334.js"><link rel="prefetch" href="/qishao-notes/assets/js/73.a9920e67.js"><link rel="prefetch" href="/qishao-notes/assets/js/74.1fd3fe36.js"><link rel="prefetch" href="/qishao-notes/assets/js/75.f1d06327.js"><link rel="prefetch" href="/qishao-notes/assets/js/76.d95bad55.js"><link rel="prefetch" href="/qishao-notes/assets/js/77.cb231a96.js"><link rel="prefetch" href="/qishao-notes/assets/js/78.626c3ef9.js"><link rel="prefetch" href="/qishao-notes/assets/js/79.ad65d7c2.js"><link rel="prefetch" href="/qishao-notes/assets/js/8.c5007a3e.js"><link rel="prefetch" href="/qishao-notes/assets/js/80.a85ea3da.js"><link rel="prefetch" href="/qishao-notes/assets/js/81.201b3bea.js"><link rel="prefetch" href="/qishao-notes/assets/js/82.271058d9.js"><link rel="prefetch" href="/qishao-notes/assets/js/83.a777a337.js"><link rel="prefetch" href="/qishao-notes/assets/js/84.f5489810.js"><link rel="prefetch" href="/qishao-notes/assets/js/85.1544ffdc.js"><link rel="prefetch" href="/qishao-notes/assets/js/86.43c3c810.js"><link rel="prefetch" href="/qishao-notes/assets/js/87.a3fd8bce.js"><link rel="prefetch" href="/qishao-notes/assets/js/88.32bac4de.js"><link rel="prefetch" href="/qishao-notes/assets/js/89.6b24a791.js"><link rel="prefetch" href="/qishao-notes/assets/js/9.7b957d82.js"><link rel="prefetch" href="/qishao-notes/assets/js/90.211ed700.js"><link rel="prefetch" href="/qishao-notes/assets/js/91.224eab1f.js"><link rel="prefetch" href="/qishao-notes/assets/js/93.6b370399.js"><link rel="prefetch" href="/qishao-notes/assets/js/94.deced27b.js"><link rel="prefetch" href="/qishao-notes/assets/js/95.b2a4f6c4.js">
+    <link rel="stylesheet" href="/qishao-notes/assets/css/0.styles.922e50b3.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open have-rightmenu"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/qishao-notes/" class="home-link router-link-active"><!----> <span class="site-name">CPU &amp; GPU Microarch. Qi Shao</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/qishao-notes/" class="nav-link">Home</a></div><div class="nav-item"><a href="/qishao-notes/gpu/" class="nav-link">gpu</a></div><div class="nav-item"><a href="/qishao-notes/cpu/" class="nav-link">cpu</a></div><div class="nav-item"><a href="/qishao-notes/llm/" class="nav-link">ml&amp;llm</a></div><div class="nav-item"><a href="/qishao-notes/compiler/" class="nav-link">compiler</a></div><div class="nav-item"><a href="/qishao-notes/hbm/" class="nav-link">hbm</a></div><div class="nav-item"><a href="/qishao-notes/mix/" class="nav-link">program</a></div><div class="nav-item"><a href="/qishao-notes/unix/" class="nav-link">unix</a></div><div class="nav-item"><a href="https://blog.csdn.net/hit_shaoqi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/hitqshao/qishao-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><!----> <nav class="nav-links"><div class="nav-item"><a href="/qishao-notes/" class="nav-link">Home</a></div><div class="nav-item"><a href="/qishao-notes/gpu/" class="nav-link">gpu</a></div><div class="nav-item"><a href="/qishao-notes/cpu/" class="nav-link">cpu</a></div><div class="nav-item"><a href="/qishao-notes/llm/" class="nav-link">ml&amp;llm</a></div><div class="nav-item"><a href="/qishao-notes/compiler/" class="nav-link">compiler</a></div><div class="nav-item"><a href="/qishao-notes/hbm/" class="nav-link">hbm</a></div><div class="nav-item"><a href="/qishao-notes/mix/" class="nav-link">program</a></div><div class="nav-item"><a href="/qishao-notes/unix/" class="nav-link">unix</a></div><div class="nav-item"><a href="https://blog.csdn.net/hit_shaoqi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/hitqshao/qishao-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/qishao-notes/pages/f00000/" class="sidebar-link">leakage current moores law meets static power</a></li><li><a href="/qishao-notes/pages/f00001/" class="sidebar-link">Blogs to be read</a></li><li><a href="/qishao-notes/pages/f00002/" class="sidebar-link">Understanding Pytorch Source Code</a></li><li><a href="/qishao-notes/pages/f00003/" class="sidebar-link">Understanding Pytorch Source Code AOT - Inductor IR - Codegen</a></li><li><a href="/qishao-notes/pages/f00004/" class="sidebar-link">CUDA Merge</a></li><li><a href="/qishao-notes/pages/f00006/" class="sidebar-link">CUDA Softmax</a></li><li><a href="/qishao-notes/pages/f00007/" class="sidebar-link">CUDA LayerNorm</a></li><li><a href="/qishao-notes/pages/f00008/" aria-current="page" class="active sidebar-link">Understanding Pytorch CUDA</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level2"><a href="/qishao-notes/pages/f00008/#pytorch-adam-cuda-kernel" class="sidebar-link">Pytorch Adam CUDA Kernel</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header level3"><a href="/qishao-notes/pages/f00008/#native-functions-yaml" class="sidebar-link">native_functions.yaml</a></li><li class="sidebar-sub-header level3"><a href="/qishao-notes/pages/f00008/#fusedadamkernel-cu" class="sidebar-link">FusedAdamKernel.cu</a></li><li class="sidebar-sub-header level3"><a href="/qishao-notes/pages/f00008/#fused-adam-impl-cu" class="sidebar-link">fusedadamimpl.cu</a></li><li class="sidebar-sub-header level3"><a href="/qishao-notes/pages/f00008/#multitensorapply-cuh" class="sidebar-link">MultiTensorApply.cuh</a></li></ul></li></ul></li></ul> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-06225672><div class="articleInfo" data-v-06225672><ul class="breadcrumbs" data-v-06225672><li data-v-06225672><a href="/qishao-notes/" title="首页" class="iconfont icon-home router-link-active" data-v-06225672></a></li> <li data-v-06225672><a href="/qishao-notes/mix/#mix" data-v-06225672>mix</a></li></ul> <div class="info" data-v-06225672><div title="作者" class="author iconfont icon-touxiang" data-v-06225672><a href="https://github.com/hitqshao" target="_blank" title="作者" class="beLink" data-v-06225672>hitqishao</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-06225672><a href="javascript:;" data-v-06225672>2024-12-30</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-title">目录</div> <div class="right-menu-content"></div></div></div> <h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAABGpJREFUSA3tVVtoXFUU3fvOI53UlmCaKIFmwEhsE7QK0ipFEdHEKpXaZGrp15SINsXUWvBDpBgQRKi0+KKoFeJHfZA+ED9KKoIU2gYD9UejTW4rVIzm0VSTziPzuNu1z507dibTTjL4U/DAzLn3nL3X2o91ziX6f9wMFdh6Jvbm9nNSV0msViVO6tN1Rm7NMu2OpeJ9lWBUTDxrJbYTS0hInuwciu9eLHlFxCLCZEk3MegsJmZ5K/JD6t7FkFdEvGUo1g7qJoG3MHImqRIn8/nzY1K9UPKKiJmtnUqHVE3Gbuay6vJE/N2FEmuxFjW2nUuE0yQXRRxLiTUAzs36zhZvOXJPdX850EVnnLZkB8prodQoM5JGj7Xk2mvC7JB8tG04Ef5PiXtG0UtxupRQSfTnBoCy554x18yJHI6I+G5Eru4LHmPJZEQsrvPUbMiA8G/WgMK7w7I+ez7++o2ANfbrjvaOl1tFMs+htG3IrZH9/hDX1Pr8Tc0UvH8tcX29KzAgIGcEkINyW5BF9x891hw6VYqgJHEk0huccS7vh3C6gTiODL+26huuBtbct8eZnqLML8PkxGYpuPZBqtqwkSjgc4mB5gbgig5i+y0UDK35LMxXisn9xQtK+nd26gTIHsHe/oblK/b29fUmN/8Y+9jAQrnBp56m1LcDlDp9irKTExSKduXJVWSqdBMA08pEJnEIOB3FPPMybu/oeV8zFeYN3xx576Q6RH+VmplE4ncQV5v+5rzSoyOU7PuEAg8g803PwBJ0CExno/jcMbN8tONYeOmHiuUNryvm3fRUy4tMPVLdAGkUhNWuggGrJcXPv+ouCjz0MKUHz1J2/E8IC9nqTabcxgaBYM0hPhD5Y65FsbxRQKxCQrDjDctW7PUM3HuZunFyifSAqEfuzCp48Il24luWUWZoyJCaPR82jE0+kFA643wRFVni4RYSq3ohJO2pZ7B5dO4xkDWbEpossJPLSrPjYID8rS2UHTlvyNxqIGsg674XJJ7vnh5L7PNwC4hh2sjCI96mzszOTpxLF0T7l88Yz7lAuK6OnL8gXLOnTvpzSb22YG8W7us3jSebFHeeqnXRG1vt+MoUM84LQIBmMsCTAcOauTh0T0l0neQK7m2bLMt2mGxU3HYssS0J2cdv5wljlPsrIuZLAG/2DOZIXgCYT8uMGZN+e2kSirfxZOPCsC0f24nTZzspnVn9VePS1Z5vubmAGGXG8ZFno9Hel0yfA5ZPhF7Dh972BQJ2qCpgH67lmWtBYbvk6sz02wjky2vXyz0XErP/kFB619js1BtwfOV4OPRqOQBjy3Qbk18vigUPPSD5ceHnwck7W9bhAqZdd7SuG7w4/P2F/GaJh8c7e9qgow+Q7cGBo+98WsLkuktFqiZabtXuQTu/Y5ETbR0v7tNSFnvrmu6pjdoan2KjMu8q/Hmj1EfCO2ZGfEIbIXKUlw8qaX9/b2oeSJmFksSeT/Fn0V3nSypChh4Gjh74ybO9aeZ/AN2dwciu2/MhAAAAAElFTkSuQmCC">Understanding Pytorch CUDA<!----></h1> <!----> <div class="theme-vdoing-content content__default"><h1 id="pytorch-cuda"><a href="#pytorch-cuda" class="header-anchor">#</a> Pytorch CUDA</h1> <h2 id="pytorch-adam-cuda-kernel"><a href="#pytorch-adam-cuda-kernel" class="header-anchor">#</a> Pytorch Adam CUDA Kernel</h2> <h3 id="native-functions-yaml"><a href="#native-functions-yaml" class="header-anchor">#</a> native_functions.yaml</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>- func: _fused_adam_(Tensor(a!)[] self,
+Tensor(b!)[] grads,
+Tensor(c!)[] exp_avgs,
+Tensor(d!)[] exp_avg_sqs,
+Tensor(e!)[] max_exp_avg_sqs,
+Tensor[] state_steps, *,
+float lr, float beta1, float beta2,
+float weight_decay, float eps, bool amsgrad,
+bool maximize, Tensor? grad_scale=None, Tensor? found_inf=None) -&gt; ()
+  # Unlike &quot;foreach&quot; functions, lists of tensors should be guaranteed to be on the same device (for now).
+  variants: function
+  dispatch:
+    CPU: _fused_adam_kernel_cpu_
+    CUDA: _fused_adam_kernel_cuda_
+    MPS: _fused_adam_kernel_mps_
+  autogen: _fused_adam, _fused_adam.out
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h3 id="fusedadamkernel-cu"><a href="#fusedadamkernel-cu" class="header-anchor">#</a> FusedAdamKernel.cu</h3> <p>./aten/arc/ATen/native/cuda</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// The following overload simply has a Tensor lr
+void _fused_adam_kernel_cuda_(
+    at::TensorList params,
+    at::TensorList grads,
+    at::TensorList exp_avgs,
+    at::TensorList exp_avg_sqs,
+    at::TensorList max_exp_avg_sqs,
+    at::TensorList state_steps,
+    const at::Tensor&amp; lr,
+    const double beta1,
+    const double beta2,
+    const double weight_decay,
+    const double eps,
+    const bool amsgrad,
+    const bool maximize,
+    const std::optional&lt;at::Tensor&gt;&amp; grad_scale,
+    const std::optional&lt;at::Tensor&gt;&amp; found_inf) {
+  if (lr.is_cpu()) {
+    _fused_adam_kernel_cuda_(
+        params,
+        grads,
+        exp_avgs,
+        exp_avg_sqs,
+        max_exp_avg_sqs,
+        state_steps,
+        lr.item&lt;double&gt;(),
+        beta1,
+        beta2,
+        weight_decay,
+        eps,
+        amsgrad,
+        maximize,
+        grad_scale,
+        found_inf);
+    return;
+  }
+
+  // Manually check devices since we specify no device check in
+  // native_functions.yaml
+  ...
+
+  if (amsgrad) {
+    ...
+  } else {
+    TORCH_CHECK(
+        at::native::check_fast_path_restrictions(
+            {params, grads, exp_avgs, exp_avg_sqs}),
+        &quot;params, grads, exp_avgs, and exp_avg_sqs must have same dtype, device, and layout&quot;);
+    _fused_adam_cuda_impl_(
+        params,
+        grads,
+        exp_avgs,
+        exp_avg_sqs,
+        state_steps,
+        lr,
+        beta1,
+        beta2,
+        weight_decay,
+        eps,
+        maximize,
+        grad_scale,
+        found_inf);
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br></div></div><h3 id="fused-adam-impl-cu"><a href="#fused-adam-impl-cu" class="header-anchor">#</a> fused_adam_impl.cu</h3> <p>./aten/arc/ATen/native/cuda</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>void _fused_adam_cuda_impl_(
+    at::TensorList params,
+    at::TensorList grads,
+    at::TensorList exp_avgs,
+    at::TensorList exp_avg_sqs,
+    at::TensorList state_steps,
+    const double lr,
+    const double beta1,
+    const double beta2,
+    const double weight_decay,
+    const double eps,
+    const bool maximize,
+    const std::optional&lt;at::Tensor&gt;&amp; grad_scale,
+    const std::optional&lt;at::Tensor&gt;&amp; found_inf) {
+  std::vector&lt;std::vector&lt;at::Tensor&gt;&gt; tensor_lists{
+      params.vec(), grads.vec(), exp_avgs.vec(), exp_avg_sqs.vec()};
+
+  const float* grad_scale_ptr =
+      grad_scale.has_value() ? grad_scale-&gt;data_ptr&lt;float&gt;() : nullptr;
+  const float* found_inf_ptr =
+      found_inf.has_value() ? found_inf-&gt;data_ptr&lt;float&gt;() : nullptr;
+  const float* lr_ptr = nullptr;
+
+  AT_DISPATCH_FLOATING_TYPES_AND2(
+      kHalf,
+      kBFloat16,
+      params[0].scalar_type(),
+      &quot;fused_adam_kernel_cuda&quot;,
+      [&amp;]() {
+        multi_tensor_apply_for_fused_optimizer&lt;4&gt;(
+            tensor_lists,
+            state_steps,
+            FusedAdamMathFunctor&lt;scalar_t, 4, ADAM_MODE::ORIGINAL, false&gt;(),
+            lr_ptr, // unused
+            lr,
+            beta1,
+            beta2,
+            weight_decay,
+            eps,
+            maximize,
+            grad_scale_ptr,
+            found_inf_ptr);
+      });
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p>The callable function is <strong>FusedAdamMathFunctor&lt;scalar_t, 4, ADAM_MODE::ORIGINAL, false&gt;()</strong>.</p> <h3 id="multitensorapply-cuh"><a href="#multitensorapply-cuh" class="header-anchor">#</a> MultiTensorApply.cuh</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+template &lt;typename T, typename U, typename... ArgTypes&gt;
+C10_LAUNCH_BOUNDS_1(kBlockSize)
+__global__ void multi_tensor_apply_kernel(
+    T tensorListMeta,
+    U callable,
+    ArgTypes... args) {
+  // Hand the chunk information to the user-supplied functor to process however
+  // it likes.
+  callable(kChunkSize, tensorListMeta, args...);
+}
+
+template &lt;int depth, typename T, typename... ArgTypes&gt;
+void multi_tensor_apply_for_fused_optimizer(
+    std::vector&lt;std::vector&lt;at::Tensor&gt;&gt;&amp; tensor_lists,
+    at::TensorList state_steps,
+    T callable,
+    ArgTypes... args) {
+    ...
+    for (const auto&amp; chunk : c10::irange(chunks)) {
+            multi_tensor_apply_kernel&lt;&lt;&lt;
+            loc_block_info,
+            kBlockSize,
+            0,
+            at::cuda::getCurrentCUDAStream()&gt;&gt;&gt;(
+            tensorListMeta, callable, args...);
+        C10_CUDA_KERNEL_LAUNCH_CHECK();
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div></div></div> <!----> <div class="page-edit"><div class="edit-link"><a href="https://github.com/hitqshao/qishao-notes/edit/main/docs/10.mix/08.learn_pytorch_cuda.md" target="_blank" rel="noopener noreferrer">帮助我们改善此页面</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2024/12/31, 08:13:53</span></div></div> <div class="page-nav-wapper"><div class="page-nav-centre-wrap"><a href="/qishao-notes/pages/f00007/" class="page-nav-centre page-nav-centre-prev"><div class="tooltip">CUDA LayerNorm</div></a> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/qishao-notes/pages/f00007/" class="prev">CUDA LayerNorm</a></span> <!----></p></div></div></div> <!----></main></div> <div class="footer"><div class="icons"><a href="https://github.com/hitqshao" title="GitHub" target="_blank" class="iconfont icon-github"></a><a href="mailto:hitqshao@163.com" title="发邮件" target="_blank" class="iconfont icon-youjian"></a><a href="https://gitee.com/hitqshao" title="Gitee" target="_blank" class="iconfont icon-gitee"></a></div> 
+  Theme by
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2022-2024
+    <span>Eryajf | <a href="https://github.com/hitqshao/qishao-notes/blob/main/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <!----> <!----> <!----></div><div class="global-ui"><!----></div></div>
+    <script src="/qishao-notes/assets/js/app.11351631.js" defer></script><script src="/qishao-notes/assets/js/2.b768edde.js" defer></script><script src="/qishao-notes/assets/js/92.d40e910a.js" defer></script>
+  </body>
+</html>
