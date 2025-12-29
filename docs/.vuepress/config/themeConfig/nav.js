@@ -8,6 +8,7 @@ module.exports = [
   { text: 'hbm',link: '/hbm/'},
   { text: 'program',link: '/mix/'},
   { text: 'unix', link: '/unix/' },
+  { text: 'llama', link: '/llama/' },
   //{ text: 'BBS', link: '/message-board/' },
   { text: 'CSDN', link: 'https://blog.csdn.net/hit_shaoqi' },
 ]
